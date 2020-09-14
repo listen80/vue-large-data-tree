@@ -1,28 +1,76 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="wrap">
+      <Map />
+      <Tree ref="tree" style="width: 350px; overflow: auto; height: 100%"/>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Tree from "./components/Tree";
+import Map from "./components/Map";
 
 export default {
-  name: 'App',
+  name: "App",
+  data() {
+    return {
+      keyword: "",
+    };
+  },
   components: {
-    HelloWorld
-  }
-}
+    Tree,
+    Map,
+  },
+  created() {
+
+    const self = this;
+    fetch("./videoResourceGroups.json")
+      .then(function(data) {
+        return data.json();
+      })
+      .then(function(data) {
+        const format = (data) => {
+          return data.map(function(child) {
+            if (child.leafNode === false) {
+              return {
+                name: child.name,
+                children: format(child.subTreeNodes),
+              };
+            } else {
+              return {
+                name: child.name,
+                children: child.resources.map(({ name }) => ({ name })),
+              };
+            }
+          });
+        };
+        self.$refs.tree.setData(format(data.responseData));
+        self.$refs.tree.$forceUpdate();
+      });
+  },
+  methods: {
+    console() {
+      console.log(this.data);
+    },
+  },
+};
 </script>
 
 <style>
+html, body {
+  margin: 0;
+  height: 100%;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100%;
+}
+.wrap {
+  display: flex;
+  height: 100%;
 }
 </style>

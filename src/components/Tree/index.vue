@@ -1,11 +1,14 @@
 <template>
   <div>
-    <TreeNodeList
-      ref="TreeNodeList"
-      :data="data"
-      v-if="data.length"
-    ></TreeNodeList>
-    <div v-else>无数据</div>
+    <div v-if="data">
+      <TreeNodeList
+        ref="TreeNodeList"
+        :data="data"
+        v-if="data.length"
+      ></TreeNodeList>
+      <div v-else>无数据</div>
+    </div>
+    <div v-else>载入中</div>
   </div>
 </template>
 
@@ -13,27 +16,17 @@
 import TreeNode from "./TreeNode.vue";
 import TreeNodeList from "./TreeNodeList.vue";
 import Vue from "vue";
+import { collectSonNodeFlag, getSelected } from "./tree";
 Vue.component("TreeNode", TreeNode);
 Vue.component("TreeNodeList", TreeNodeList);
 
 export default {
-  name: "Tree",
-  watch: {
-    selected() {
-      this.initTreeData();
-      this.$refs.TreeNodeList && this.$refs.TreeNodeList.setSonNode();
-    },
-    keyword() {
-      this.initTreeData();
-      this.$refs.TreeNodeList && this.$refs.TreeNodeList.setSonNode();
-    },
-  },
+  name: "TreeRoot",
   created() {
-    this.data = [];
+    this.data = null;
     this.selected = [];
     this.keyword = "";
     this.$tree = this;
-    this.initTreeData();
   },
   methods: {
     setData(data) {
@@ -47,8 +40,8 @@ export default {
       this.selected = selected;
       this.initTreeData();
     },
-    getSelected() {
-      return this.selected;
+    getSelected(onlyLeaf) {
+      return getSelected(this.data, [], onlyLeaf);
     },
     setKeyword(keyword) {
       this.keyword = keyword;
@@ -56,32 +49,12 @@ export default {
     },
     initTreeData() {
       // selectedMap
-      this.selectedMap = Object.create(null);
+      const selectedMap = Object.create(null);
       this.selected.forEach((selectedId) => {
-        this.selectedMap[selectedId] = true;
+        selectedMap[selectedId] = true;
       });
-      const collectSonNodeFlag = (dataList, parent) => {
-        dataList.forEach((data) => {
-          data.$parent = parent;
-
-          if (data.children) {
-            collectSonNodeFlag(data.children, data);
-            let $checked = 0;
-            let $total = 0;
-            for (let i = 0; i < data.children.length; i++) {
-              $checked += data.children[i].$checked;
-              $total += data.children[i].$total;
-            }
-            data.$checked = $checked;
-            data.$total = $total;
-          } else {
-            data.$checked = this.selectedMap[data.id] ? 1 : 0;
-            data.$total = 1;
-          }
-        });
-      };
-      collectSonNodeFlag(this.data, null);
-      console.log(this.data);
+      collectSonNodeFlag(this.data, null, selectedMap);
+      this.$forceUpdate();
     },
   },
 };

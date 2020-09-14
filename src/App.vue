@@ -2,7 +2,7 @@
   <div id="app">
     <div class="wrap">
       <Map />
-      <Tree ref="tree" style="width: 350px; overflow: auto; height: 100%"/>
+      <Tree ref="tree" @checkBoxClick="checkBoxClick" class="tree" />
     </div>
   </div>
 </template>
@@ -10,55 +10,31 @@
 <script>
 import Tree from "./components/Tree";
 import Map from "./components/Map";
+import { setTreeData } from "./app.js";
 
 export default {
   name: "App",
   data() {
-    return {
-      keyword: "",
-    };
+    return {};
   },
   components: {
     Tree,
     Map,
   },
-  created() {
-
-    const self = this;
-    fetch("./videoResourceGroups.json")
-      .then(function(data) {
-        return data.json();
-      })
-      .then(function(data) {
-        const format = (data) => {
-          return data.map(function(child) {
-            if (child.leafNode === false) {
-              return {
-                name: child.name,
-                children: format(child.subTreeNodes),
-              };
-            } else {
-              return {
-                name: child.name,
-                children: child.resources.map(({ name }) => ({ name })),
-              };
-            }
-          });
-        };
-        self.$refs.tree.setData(format(data.responseData));
-        self.$refs.tree.$forceUpdate();
-      });
+  mounted() {
+    setTreeData(this.$refs.tree);
   },
   methods: {
-    console() {
-      console.log(this.data);
+    checkBoxClick(data) {
+      console.log(data, this.$refs.tree.getSelected(true));
     },
   },
 };
 </script>
 
 <style>
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
 }
@@ -71,6 +47,15 @@ html, body {
 }
 .wrap {
   display: flex;
+  height: 100%;
+}
+.tree {
+  width: 350px;
+  overflow: auto;
+  height: 100%;
+}
+.map {
+  flex: 1;
   height: 100%;
 }
 </style>

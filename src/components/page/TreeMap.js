@@ -15,7 +15,7 @@ const format = (data) => {
 };
 
 export const setTreeData = (tree) => {
-  fetch("./videoResourceGroups.json")
+  fetch("./mock/videoResourceGroups.json")
     .then(function(data) {
       return data.json();
     })

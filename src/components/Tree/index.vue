@@ -1,5 +1,6 @@
 <template>
   <div>
+    <input type="text" v-model="keyword" />
     <div v-if="data">
       <TreeNodeList
         ref="TreeNodeList"
@@ -22,6 +23,16 @@ Vue.component("TreeNodeList", TreeNodeList);
 
 export default {
   name: "TreeRoot",
+  data() {
+    return {
+      keyword: "",
+    };
+  },
+  watch: {
+    keyword() {
+      this.initTreeData();
+    },
+  },
   created() {
     this.data = null;
     this.selected = [];
@@ -53,8 +64,12 @@ export default {
       this.selected.forEach((selectedId) => {
         selectedMap[selectedId] = true;
       });
-      collectSonNodeFlag(this.data, null, selectedMap);
+      collectSonNodeFlag(this.data, null, selectedMap, this.keyword);
       this.$forceUpdate();
+      this.$nextTick(function() {
+        this.$refs.TreeNodeList && this.$refs.TreeNodeList.setSonNode();
+      })
+      console.log(this.data);
     },
   },
 };

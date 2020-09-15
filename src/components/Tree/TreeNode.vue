@@ -4,7 +4,7 @@
       <Caret :isLeaf="data.children" :expand="expand" @click="caretClick" />
       <CheckBox :flag="flag" @click="checkBoxClick" />
       <span @click="labelClick">{{ data.name }}</span>
-      <span v-if="data.children">( {{ checked }} / {{ total }} )</span>
+      <span>( {{ checked }} / {{ total }} )</span>
     </div>
     <div class="p20">
       <TreeNodeList
@@ -20,6 +20,9 @@
 import CheckBox from "./CheckBox";
 import Caret from "./Caret";
 import { calcSonNode, calcParentNode } from "./tree";
+const ALL = 2;
+const NONE = 0;
+const SOME = 1;
 
 export default {
   name: "TreeNode",
@@ -28,6 +31,7 @@ export default {
     return {
       expand: false,
       checked: 0,
+      total: 0,
     };
   },
   components: {
@@ -37,28 +41,30 @@ export default {
   computed: {
     flag() {
       if (this.checked === this.total) {
-        return 2;
+        return ALL;
       } else if (this.checked === 0) {
-        return 0;
+        return NONE;
       } else {
-        return 1;
+        return SOME;
       }
     },
   },
   created() {
     this.$tree = this.$parent.$tree;
-    this.checked = this.data.$checked;
-    this.total = this.data.$total;
+    this.update();
   },
   methods: {
-    setSonNode() {
+    update() {
       this.checked = this.data.$checked;
       this.total = this.data.$total;
+    },
+    setSonNode() {
+      this.update();
       // 展开状态时，需要更新UI
       this.$refs.TreeNodeList && this.$refs.TreeNodeList.setSonNode();
     },
     setParentNode() {
-      this.checked = this.data.$checked;
+      this.update();
       // 更新父UI
       this.$parent.setParentNode();
     },

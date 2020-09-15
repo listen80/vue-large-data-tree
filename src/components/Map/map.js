@@ -25,7 +25,7 @@ export const url =
 /* eslint-disable no-undef */
 export const renderBaiduMap = (el) => {
   var map = new BMap.Map(el); // 创建Map实例
-  map.centerAndZoom(new BMap.Point(121.474791, 31.224072), 14); // 初始化地图,设置中心点坐标和地图级别
+  map.centerAndZoom(new BMap.Point(113.958409, 22.538473), 18); // 初始化地图,设置中心点坐标和地图级别
   //添加地图类型控件
   map.addControl(
     new BMap.MapTypeControl({
@@ -43,12 +43,13 @@ export const renderBaiduMap = (el) => {
   map.addEventListener("click", function(e) {
     var lng = e.point.lng;
     var lat = e.point.lat;
+    console.log(e)
     var p1 = new BMap.Point(lng, lat);
     var marker = new BMap.Marker(p1); // 创建标注
     map.addOverlay(marker); // 将标注添加到地图中
   });
   // var geolocation = new BMap.Geolocation();
-  // geolocation.getCurrentPosition(
+  // geoelocation.getCurrentPosition(
   //   function(r) {
   //     // 定位成功事件
   //     if (this.getStatus() == BMAP_STATUS_SUCCESS) {
@@ -59,4 +60,5 @@ export const renderBaiduMap = (el) => {
   //   },
   //   { enableHighAccuracy: true }
   // );
+  return map;
 };

@@ -60,10 +60,11 @@ export default {
     },
     initTreeData() {
       // selectedMap
-      const selectedMap = Object.create(null);
-      this.selected.forEach((selectedId) => {
-        selectedMap[selectedId] = true;
-      });
+      const selectedMap = this.selected.reduce((all, item) => {
+        all[item] = true;
+        return all;
+      }, Object.create(null));
+
       collectSonNodeFlag(this.data, null, selectedMap, this.keyword);
       this.$forceUpdate();
       this.$nextTick(function() {

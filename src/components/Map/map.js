@@ -40,4 +40,23 @@ export const renderBaiduMap = (el) => {
   );
   map.setCurrentCity("北京"); // 设置地图显示的城市 此项是必须设置的
   map.enableScrollWheelZoom(true);
+  map.addEventListener("click", function(e) {
+    var lng = e.point.lng;
+    var lat = e.point.lat;
+    var p1 = new BMap.Point(lng, lat);
+    var marker = new BMap.Marker(p1); // 创建标注
+    map.addOverlay(marker); // 将标注添加到地图中
+  });
+  // var geolocation = new BMap.Geolocation();
+  // geolocation.getCurrentPosition(
+  //   function(r) {
+  //     // 定位成功事件
+  //     if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+  //       // alert("您的位置：" + r.point.lng + "," + r.point.lat);
+  //       // map.centerAndZoom(new BMap.Point(r.point.lng,  r.point.lat), 14)
+  //       // var point = new BMap.Point(r.point.lng, +r.point.lat);
+  //     }
+  //   },
+  //   { enableHighAccuracy: true }
+  // );
 };

@@ -20,6 +20,7 @@
 import CheckBox from "./CheckBox";
 import Caret from "./Caret";
 import { calcSonNode, calcParentNode } from "./tree";
+
 const ALL = 2;
 const NONE = 0;
 const SOME = 1;

@@ -20,6 +20,6 @@ export const setTreeData = (tree) => {
       return data.json();
     })
     .then(function(data) {
-      tree.setData(format(data.responseData));
+      tree.setData(format(data));
     });
 };

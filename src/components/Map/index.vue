@@ -5,15 +5,21 @@
 </template>
 
 <script>
-import { loadScript, url, renderBaiduMap } from "./map";
+import { loadScript, url, renderBaiduMap, addMarker } from "./map";
 
 export default {
   mounted() {
     const el = this.$refs.map;
+    const self = this;
     loadScript(url, function() {
-      renderBaiduMap(el);
+      self.map = renderBaiduMap(el);
     });
   },
+  methods: {
+    drawMarkers(data) {
+      addMarker(this.map, data.slice(0, 10))
+    }
+  }
 };
 </script>
 

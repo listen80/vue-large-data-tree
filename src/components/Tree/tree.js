@@ -62,12 +62,11 @@ export const getSelected = (data, selected, onlyLeaf) => {
   if (data) {
     data.forEach((child) => {
       if (child.$checked > 0) {
-        if (onlyLeaf && !child.children) {
-          selected.push(child);
+        if (onlyLeaf) {
+          !child.children && selected.push(child);
         } else {
           selected.push(child);
         }
-
         getSelected(child.children, selected, onlyLeaf);
       }
     });

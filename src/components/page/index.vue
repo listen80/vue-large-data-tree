@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <Map markers="markers" class="map" />
+    <Map ref="map" markers="markers" class="map" />
     <Tree ref="tree" @checkBoxClick="checkBoxClick" class="tree" />
   </div>
 </template>
@@ -8,7 +8,7 @@
 <script>
 import Tree from "../Tree";
 import Map from "../Map";
-import { setTreeData } from "./TreeMap.js";
+import { getTreeData, format } from "./TreeMap.js";
 
 export default {
   name: "TreeMap",
@@ -20,11 +20,18 @@ export default {
     Map,
   },
   mounted() {
-    setTreeData(this.$refs.tree);
+    getTreeData().then(
+      function(data) {
+        const markers = [];
+        const tree = format(data, markers);
+        this.$refs.tree.setData(tree);
+      }.bind(this)
+    );
   },
   methods: {
     checkBoxClick(data) {
       console.log(data, this.$refs.tree.getSelected(true));
+        this.$refs.map.drawMarkers(this.$refs.tree.getSelected(true));
     },
   },
 };

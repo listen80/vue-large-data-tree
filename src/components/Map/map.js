@@ -43,22 +43,31 @@ export const renderBaiduMap = (el) => {
   map.addEventListener("click", function(e) {
     var lng = e.point.lng;
     var lat = e.point.lat;
-    console.log(e)
     var p1 = new BMap.Point(lng, lat);
     var marker = new BMap.Marker(p1); // 创建标注
     map.addOverlay(marker); // 将标注添加到地图中
   });
-  // var geolocation = new BMap.Geolocation();
-  // geoelocation.getCurrentPosition(
-  //   function(r) {
-  //     // 定位成功事件
-  //     if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-  //       // alert("您的位置：" + r.point.lng + "," + r.point.lat);
-  //       // map.centerAndZoom(new BMap.Point(r.point.lng,  r.point.lat), 14)
-  //       // var point = new BMap.Point(r.point.lng, +r.point.lat);
-  //     }
-  //   },
-  //   { enableHighAccuracy: true }
-  // );
+  var geolocation = new BMap.Geolocation();
+  geolocation.getCurrentPosition(
+    function(r) {
+      // 定位成功事件
+      if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+        console.log("您的位置：" + r.point.lng + "," + r.point.lat);
+        setTimeout(() => {
+          map.centerAndZoom(new BMap.Point(r.point.lng,  r.point.lat), 14)
+        }, 1000)
+        // var point = new BMap.Point(r.point.lng, +r.point.lat);
+      }
+    },
+    { enableHighAccuracy: true }
+  );
   return map;
+};
+
+export const addMarker = (map, arr) => {
+  arr.forEach(({latitude, longitude}) => {
+    var p1 = new BMap.Point(longitude, latitude);
+    var marker = new BMap.Marker(p1); // 创建标注
+    map.addOverlay(marker); // 将标注添加到地图中
+  })
 };

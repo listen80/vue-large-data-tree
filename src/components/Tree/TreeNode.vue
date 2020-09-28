@@ -6,7 +6,7 @@
       <span @click="labelClick">{{ data.name }}</span>
       <span>( {{ checked }} / {{ total }} )</span>
     </div>
-    <div class="p20" :style="{'max-height': expand ? '999px': '0px'}">
+    <div class="p20">
       <TreeNodeList
         ref="TreeNodeList"
         v-if="expand && data.children"
@@ -92,16 +92,13 @@ export default {
 <style scoped>
 .node {
   white-space: nowrap;
-  line-height: 18px;
+  line-height: 1.25;
   padding: 1px 0;
 }
 .node span {
-  vertical-align: top;
+  vertical-align: middle;
 }
 .p20 {
   padding-left: 20px;
-  transition: 1s;
-  max-height: 1114px;
-  overflow-y: hidden;
 }
 </style>

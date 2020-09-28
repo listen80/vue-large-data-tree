@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <Map ref="map" markers="markers" class="map" />
+    <Map ref="map" markers="markers" @circle="circle" class="map" />
     <Tree ref="tree" @checkBoxClick="checkBoxClick" class="tree" />
   </div>
 </template>
@@ -31,8 +31,11 @@ export default {
   methods: {
     checkBoxClick(data) {
       console.log(data, this.$refs.tree.getSelected(true));
-        this.$refs.map.drawMarkers(this.$refs.tree.getSelected(true));
+      this.$refs.map.drawMarkers([data], this.$refs.tree.getSelected(true));
     },
+    circle() {
+      
+    }
   },
 };
 </script>

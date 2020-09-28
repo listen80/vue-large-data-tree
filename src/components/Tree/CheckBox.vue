@@ -45,6 +45,7 @@ export default {
   height: 16px;
   color: white;
   vertical-align: top;
+  line-height: 16px;
 }
 .highlight {
   background: #1c91ff;

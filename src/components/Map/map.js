@@ -38,7 +38,7 @@ export const renderBaiduMap = (el) => {
       ],
     })
   );
-  map.setCurrentCity("北京"); // 设置地图显示的城市 此项是必须设置的
+  map.setCurrentCity("深圳"); // 设置地图显示的城市 此项是必须设置的
   map.enableScrollWheelZoom(true);
   map.addEventListener("click", function(e) {
     var lng = e.point.lng;
@@ -53,9 +53,9 @@ export const renderBaiduMap = (el) => {
       // 定位成功事件
       if (this.getStatus() == BMAP_STATUS_SUCCESS) {
         console.log("您的位置：" + r.point.lng + "," + r.point.lat);
-        setTimeout(() => {
-          map.centerAndZoom(new BMap.Point(r.point.lng,  r.point.lat), 14)
-        }, 1000)
+        // setTimeout(() => {
+        //   map.centerAndZoom(new BMap.Point(r.point.lng,  r.point.lat), 14)
+        // }, 1000)
         // var point = new BMap.Point(r.point.lng, +r.point.lat);
       }
     },
@@ -65,9 +65,9 @@ export const renderBaiduMap = (el) => {
 };
 
 export const addMarker = (map, arr) => {
-  arr.forEach(({latitude, longitude}) => {
+  arr.forEach(({ latitude, longitude }) => {
     var p1 = new BMap.Point(longitude, latitude);
     var marker = new BMap.Marker(p1); // 创建标注
     map.addOverlay(marker); // 将标注添加到地图中
-  })
+  });
 };

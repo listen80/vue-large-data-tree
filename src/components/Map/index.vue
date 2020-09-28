@@ -17,9 +17,11 @@ export default {
   },
   methods: {
     drawMarkers(data) {
-      addMarker(this.map, data.slice(0, 10))
+      addMarker(this.map, data.sort(function() {
+        return Math.random() - .5
+      }).slice(0, 10))
     }
-  }
+  },
 };
 </script>
 

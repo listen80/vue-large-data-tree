@@ -1,7 +1,18 @@
 <template>
   <div class="wrap">
-    <Map ref="map" markers="markers" @circle="circle" class="map" />
-    <Tree ref="tree" @checkBoxClick="checkBoxClick" class="tree" />
+    <Tree
+      ref="tree"
+      :selected="[]"
+      @checkBoxClick="checkBoxClick"
+      class="tree"
+    />
+    <Map
+      ref="map"
+      markers="markers"
+      @circle="circle"
+      @click="mapClick"
+      class="map"
+    />
   </div>
 </template>
 
@@ -21,7 +32,7 @@ export default {
   },
   mounted() {
     getTreeData().then(
-      function(data) {
+      function (data) {
         const markers = [];
         const tree = format(data, markers);
         this.$refs.tree.setData(tree);
@@ -31,11 +42,10 @@ export default {
   methods: {
     checkBoxClick(data) {
       console.log(data, this.$refs.tree.getSelected(true));
-      this.$refs.map.drawMarkers([data], this.$refs.tree.getSelected(true));
+      // this.$refs.map.drawMarkers([data], this.$refs.tree.getSelected(true));
     },
-    circle() {
-      
-    }
+    circle() {},
+    mapClick() {},
   },
 };
 </script>

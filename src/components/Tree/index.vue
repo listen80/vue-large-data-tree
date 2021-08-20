@@ -23,6 +23,12 @@ Vue.component("TreeNodeList", TreeNodeList);
 
 export default {
   name: "TreeRoot",
+  props: {
+    selected: {
+      default: () => ([])
+    },
+    type: Array,
+  },
   data() {
     return {
       keyword: "",
@@ -35,7 +41,6 @@ export default {
   },
   created() {
     this.data = null;
-    this.selected = [];
     this.keyword = "";
     this.$tree = this;
   },
@@ -60,16 +65,17 @@ export default {
     },
     initTreeData() {
       // selectedMap
-      const selectedMap = this.selected.reduce((all, item) => {
-        all[item] = true;
-        return all;
-      }, Object.create(null));
+      const selectedMap = Object.create(null);
+
+      this.selected.forEach((item) => {
+        selectedMap[item] = true;
+      });
 
       collectSonNodeFlag(this.data, null, selectedMap, this.keyword);
       this.$forceUpdate();
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         this.$refs.TreeNodeList && this.$refs.TreeNodeList.setSonNode();
-      })
+      });
       console.log(this.data);
     },
   },

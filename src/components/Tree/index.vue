@@ -47,6 +47,7 @@ export default {
   methods: {
     setData(data) {
       this.data = data;
+      console.log(data)
       this.initTreeData();
     },
     getData() {
@@ -72,7 +73,9 @@ export default {
       });
 
       collectSonNodeFlag(this.data, null, selectedMap, this.keyword);
+
       this.$forceUpdate();
+      
       this.$nextTick(function () {
         this.$refs.TreeNodeList && this.$refs.TreeNodeList.setSonNode();
       });

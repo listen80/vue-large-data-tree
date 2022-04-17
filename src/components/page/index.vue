@@ -6,20 +6,12 @@
       @checkBoxClick="checkBoxClick"
       class="tree"
     />
-    <Map
-      ref="map"
-      markers="markers"
-      @circle="circle"
-      @click="mapClick"
-      class="map"
-    />
   </div>
 </template>
 
 <script>
 import Tree from "../Tree";
-import Map from "../Map";
-import { getTreeData, format } from "./TreeMap.js";
+import { getTreeData } from "./TreeMap.js";
 
 export default {
   name: "TreeMap",
@@ -28,16 +20,9 @@ export default {
   },
   components: {
     Tree,
-    Map,
   },
   mounted() {
-    getTreeData().then(
-      function (data) {
-        const markers = [];
-        const tree = format(data, markers);
-        this.$refs.tree.setData(tree);
-      }.bind(this)
-    );
+    getTreeData().then((data) => {this.$refs.tree.setData(data)});
   },
   methods: {
     checkBoxClick(data) {
@@ -58,10 +43,6 @@ export default {
 .tree {
   width: 350px;
   overflow: auto;
-  height: 100%;
-}
-.map {
-  flex: 1;
   height: 100%;
 }
 </style>

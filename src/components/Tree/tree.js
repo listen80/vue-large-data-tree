@@ -13,13 +13,13 @@ export const collectSonNodeFlag = (dataList, parent, selectedMap, keyword) => {
       const children = [];
       for (let i = 0; i < data.$children.length; i++) {
         const child = data.$children[i];
-        if (child.$keep) {
+        // if (child.$keep) {
           children.push(child);
           $checked += child.$checked;
           $total += child.$total;
-        }
+        // }
       }
-      data.children = children;
+      // data.children = children;
       data.$checked = $checked;
       data.$total = $total;
       data.$keep = $total > 0;

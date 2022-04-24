@@ -1,7 +1,7 @@
 <template>
   <div class="node">
     <div class="node-content">
-      <Caret :isLeaf="data.children" :expand="expand" @click="caretClick" />
+      <Caret :isLeaf="data.children && data.children.length" :expand="expand" @click="caretClick" />
       <CheckBox :flag="flag" @click="checkBoxClick" />
       <span @click="labelClick">{{ data.name }}</span>
       <span>( {{ checked }} / {{ total }} )</span>

@@ -9,7 +9,7 @@ export const collectSonNodeFlag = (dataList, parent, selectedMap, keyword) => {
       collectSonNodeFlag(data.$children, data, selectedMap, keyword);
       
       let $checked = 0;
-      let $total = 0;
+      let $total = 1;
       const children = [];
       for (let i = 0; i < data.$children.length; i++) {
         const child = data.$children[i];
@@ -20,9 +20,9 @@ export const collectSonNodeFlag = (dataList, parent, selectedMap, keyword) => {
         // }
       }
       // data.children = children;
-      data.$checked = $checked;
+      data.$checked = $checked
       data.$total = $total;
-      data.$keep = $total > 0;
+      // data.$keep = $total > 0;
     } else {
       if (!keyword || data.name.includes(keyword)) {
         data.$keep = true;

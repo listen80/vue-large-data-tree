@@ -1,11 +1,20 @@
-function createData(maxDept, count = 10) {
+const createData = (maxDept, count = 10) => {
   if (maxDept > 0) {
-    return Array(count).fill().map((item, index) => ({
-      name: `${maxDept}-${index}`,
-      children: createData(maxDept - 1)
-    }))
+    return Array(count)
+      .fill()
+      .map((item, index) => ({
+        name: `${maxDept}-${index}`,
+        id: `${maxDept}-${index}`,
+        children: createData(maxDept - 1),
+      }));
   } else {
-    return []
+    return [];
   }
-}
-export const getTreeData = () => Promise.resolve(createData(5, 10))
+};
+
+export const getTreeData = () =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(createData(6, 10));
+    }, 400);
+  });

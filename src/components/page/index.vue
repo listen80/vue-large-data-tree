@@ -29,8 +29,6 @@ export default {
       console.log(data, this.$refs.tree.getSelected(true));
       // this.$refs.map.drawMarkers([data], this.$refs.tree.getSelected(true));
     },
-    circle() {},
-    mapClick() {},
   },
 };
 </script>
@@ -41,8 +39,10 @@ export default {
   height: 100%;
 }
 .tree {
-  width: 350px;
+  width: 500px;
   overflow: auto;
   height: 100%;
+  margin: 20px auto;
+  background-color: #eef;
 }
 </style>

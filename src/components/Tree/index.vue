@@ -1,16 +1,13 @@
 <template>
-  <div>
-    <input type="text" v-model="keyword" />
-    <div v-if="data">
-      <TreeNodeList
-        ref="TreeNodeList"
-        :data="data"
-        v-if="data.length"
-      ></TreeNodeList>
-      <div v-else>无数据</div>
-    </div>
-    <div v-else>载入中</div>
+  <div v-if="data">
+    <TreeNodeList
+      v-if="data.length"
+      ref="TreeNodeList"
+      :data="data"
+    ></TreeNodeList>
+    <div v-else>无数据</div>
   </div>
+  <div v-else>载入中</div>
 </template>
 
 <script>
@@ -23,31 +20,15 @@ Vue.component("TreeNodeList", TreeNodeList);
 
 export default {
   name: "TreeRoot",
-  props: {
-    selected: {
-      default: () => ([])
-    },
-    type: Array,
-  },
-  data() {
-    return {
-      keyword: "",
-    };
-  },
-  watch: {
-    keyword() {
-      this.initTreeData();
-    },
-  },
   created() {
     this.data = null;
     this.keyword = "";
+    this.selected = []
     this.$tree = this;
   },
   methods: {
     setData(data) {
       this.data = data;
-      console.log(data)
       this.initTreeData();
     },
     getData() {
@@ -60,26 +41,16 @@ export default {
     getSelected(onlyLeaf) {
       return getSelected(this.data, [], onlyLeaf);
     },
-    setKeyword(keyword) {
-      this.keyword = keyword;
-      this.initTreeData();
-    },
     initTreeData() {
       // selectedMap
       const selectedMap = Object.create(null);
-
-      this.selected.forEach((item) => {
-        selectedMap[item] = true;
-      });
-
+      this.selected.forEach((item) => selectedMap[item] = true);
       collectSonNodeFlag(this.data, null, selectedMap, this.keyword);
-
       this.$forceUpdate();
       
-      this.$nextTick(function () {
-        this.$refs.TreeNodeList && this.$refs.TreeNodeList.setSonNode();
-      });
-      console.log(this.data);
+      // this.$nextTick(function () {
+      //   this.$refs.TreeNodeList && this.$refs.TreeNodeList.setSonNode();
+      // });
     },
   },
 };

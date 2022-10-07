@@ -16,5 +16,5 @@ export const getTreeData = () =>
   new Promise((resolve) => {
     setTimeout(() => {
       resolve(createData(6, 10));
-    }, 400);
+    }, 111);
   });

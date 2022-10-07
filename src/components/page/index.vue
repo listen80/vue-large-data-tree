@@ -36,7 +36,7 @@ export default {
 <style>
 .wrap {
   display: flex;
-  height: 100%;
+  height: 500px;
 }
 .tree {
   width: 500px;

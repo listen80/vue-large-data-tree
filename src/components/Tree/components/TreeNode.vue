@@ -19,7 +19,7 @@
 <script>
 import CheckBox from "./CheckBox";
 import Caret from "./Caret";
-import { calcSonNode, calcParentNode } from "./tree";
+import { calcSonNode, calcParentNode } from "../tree";
 
 const ALL = 2;
 const NONE = 0;

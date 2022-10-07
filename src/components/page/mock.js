@@ -3,8 +3,8 @@ const createData = (maxDept, count = 10) => {
     return Array(count)
       .fill()
       .map((item, index) => ({
-        name: `${maxDept}-${index}`,
-        id: `${maxDept}-${index}`,
+        name: `name-${maxDept}-${index}`,
+        id: `id-${maxDept}-${index}`,
         children: createData(maxDept - 1),
       }));
   } else {

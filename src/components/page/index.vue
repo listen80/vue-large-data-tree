@@ -11,7 +11,7 @@
 
 <script>
 import Tree from "../Tree";
-import { getTreeData } from "./TreeMap.js";
+import { getTreeData } from "./mock.js";
 
 export default {
   name: "TreeMap",

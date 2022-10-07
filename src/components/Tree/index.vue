@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import TreeNode from "./TreeNode.vue";
-import TreeNodeList from "./TreeNodeList.vue";
+import TreeNode from "./components/TreeNode.vue";
+import TreeNodeList from "./components/TreeNodeList.vue";
 import Vue from "vue";
 import { collectSonNodeFlag, getSelected } from "./tree";
 Vue.component("TreeNode", TreeNode);

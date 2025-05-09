@@ -62,7 +62,7 @@ export default {
     setSonNode() {
       this.update();
       // 展开状态时，需要更新UI
-      this.$refs.TreeNodeList && this.$refs.TreeNodeList.setSonNode();
+      this.$refs.TreeNodeList?.setSonNode();
     },
     setParentNode() {
       this.update();

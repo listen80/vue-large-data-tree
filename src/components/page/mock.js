@@ -5,16 +5,11 @@ const createData = (maxDept, count = 10) => {
       .map((item, index) => ({
         name: `name-${maxDept}-${index}`,
         id: `id-${maxDept}-${index}`,
-        children: createData(maxDept - 1),
+        children: createData(maxDept - 1, count),
       }));
   } else {
     return [];
   }
 };
 
-export const getTreeData = () =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(createData(6, 10));
-    }, 111);
-  });
+export const getTreeData = () => Promise.resolve(createData(6, 9));

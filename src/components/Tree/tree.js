@@ -7,7 +7,7 @@ export const collectSonNodeFlag = (dataList, parent, selectedMap, keyword) => {
         data.$children = data.children.slice();
       }
       collectSonNodeFlag(data.$children, data, selectedMap, keyword);
-      
+
       let $checked = 0;
       let $total = 1;
       const children = [];

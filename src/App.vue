@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="demo">
     <Page />
   </div>
 </template>
@@ -8,20 +8,15 @@
 import Page from "./components/page";
 
 export default {
-  name: "App",
+  name: "Root",
   components: {
     Page,
   },
 };
 </script>
 
-<style>
-html,
-body {
-  margin: 0;
-  height: 100%;
-}
-#app {
+<style scoped>
+.demo {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

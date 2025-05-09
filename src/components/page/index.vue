@@ -1,8 +1,8 @@
 <template>
   <div class="wrap">
+    <div>{{ selected.length }}</div>
     <Tree
       ref="tree"
-      :selected="[]"
       @checkBoxClick="checkBoxClick"
       class="tree"
     />
@@ -16,7 +16,9 @@ import { getTreeData } from "./mock.js";
 export default {
   name: "TreeMap",
   data() {
-    return {};
+    return {
+      selected: []
+    };
   },
   components: {
     Tree,
@@ -35,14 +37,12 @@ export default {
 
 <style>
 .wrap {
-  display: flex;
+  background-color: #eef;
+  margin: 10px auto;
   height: 500px;
+  width: 500px;
 }
 .tree {
-  width: 500px;
   overflow: auto;
-  height: 100%;
-  margin: 20px auto;
-  background-color: #eef;
 }
 </style>

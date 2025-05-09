@@ -28,14 +28,13 @@ export default {
   methods: {
     setSonNode() {
       this.$nextTick(function() {
-        this.$refs.TreeNode &&
-          this.$refs.TreeNode.forEach((vm) => {
-            vm.setSonNode();
-          });
+        this.$refs.TreeNode?.forEach((vm) => {
+          vm.setSonNode();
+        });
       });
     },
     setParentNode() {
-      this.$parent.setParentNode && this.$parent.setParentNode();
+      this.$parent.setParentNode?.();
     },
   },
 };

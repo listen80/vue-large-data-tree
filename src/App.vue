@@ -1,16 +1,16 @@
 <template>
   <div class="demo">
-    <Page />
+    <Demo />
   </div>
 </template>
 
 <script>
-import Page from "./components/page";
+import Demo from "./components/Demo";
 
 export default {
   name: "Root",
   components: {
-    Page,
+    Demo,
   },
 };
 </script>
@@ -24,3 +24,4 @@ export default {
   height: 100%;
 }
 </style>
+./components/Demo

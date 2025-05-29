@@ -1,12 +1,12 @@
 <template>
   <div class="node-list">
     <div v-for="(node, index) in data" :key="index">
-      <TreeNode
+      <LTreeNode
         ref="TreeNode"
         v-if="index < (page + 1) * size"
         :key="index"
         :data="node"
-      ></TreeNode>
+      ></LTreeNode>
     </div>
     <div v-if="data.length > (page + 1) * size" @click="page++" class="more">
       点击显示更多数据...

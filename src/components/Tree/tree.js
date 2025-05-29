@@ -20,7 +20,7 @@ export const collectSonNodeFlag = (dataList, parent, selectedMap, keyword) => {
         // }
       }
       // data.children = children;
-      data.$checked = $checked
+      data.$checked = $checked;
       data.$total = $total;
       // data.$keep = $total > 0;
     } else {
@@ -73,3 +73,30 @@ export const getSelected = (data, selected, onlyLeaf) => {
   }
   return selected;
 };
+export const getSelectedIds = (data, selected, onlyLeaf) => {
+  if (data) {
+    data.forEach((child) => {
+      if (child.$checked > 0) {
+        if (onlyLeaf) {
+          !child.children && selected.push(child.id);
+        } else {
+          selected.push(child.id);
+        }
+        getSelectedIds(child.children, selected, onlyLeaf);
+      }
+    });
+  }
+  return selected;
+};
+
+export const getSelectedMap = (data, selectedMap) => {
+  if (data) {
+    data.forEach((child) => {
+      if (child.$checked > 0) {
+        selectedMap[child.id] = true;
+        getSelectedMap(child.children, selectedMap);
+      }
+    });
+  }
+  return selectedMap;
+}

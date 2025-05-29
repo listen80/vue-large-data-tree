@@ -7,11 +7,11 @@
       <span>( {{ checked }} / {{ total }} )</span>
     </div>
     <div class="p20">
-      <TreeNodeList
+      <LTreeNodeList
         ref="TreeNodeList"
         v-if="expand && data.children"
         :data="data.children"
-      ></TreeNodeList>
+      ></LTreeNodeList>
     </div>
   </div>
 </template>

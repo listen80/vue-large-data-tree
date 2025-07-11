@@ -12,4 +12,4 @@ const createData = (maxDept, count = 10) => {
   }
 };
 
-export const getTreeData = () => Promise.resolve(createData(6, 9));
+export const getTreeData = () => Promise.resolve(createData(6, 10));

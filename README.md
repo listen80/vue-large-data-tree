@@ -1,5 +1,7 @@
 # vue-large-data-tree
 
+## demo
+(demo)[dist/]
 ## Project setup
 ```
 yarn install

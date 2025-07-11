@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Demo from "./components/Demo";
+import Demo from "./Demo";
 
 export default {
   name: "Root",
@@ -24,4 +24,3 @@ export default {
   height: 100%;
 }
 </style>
-./components/Demo

@@ -1,4 +1,4 @@
-# vue-large
+# vue-large-data-tree
 
 ## Project setup
 ```

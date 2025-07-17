@@ -1,12 +1,7 @@
 <template>
   <div class="modal">
     <div class="wrap">
-      <div class="tree">
-        <Tree ref="tree" @checkBoxClick="checkBoxClick" />
-      </div>
-      <div>
-        
-      </div>
+      <Tree ref="tree" @checkBoxClick="checkBoxClick" selected="selected" />
     </div>
   </div>
 </template>
@@ -27,13 +22,9 @@ export default {
   },
   mounted() {
     // 初始化树状结构数据
-    this.initTreeData()
+    getTreeData().then((data) => { this.$refs.tree.setData(data) });
   },
   methods: {
-    initTreeData() {
-      // 获取树状结构数据并设置到树组件中
-      getTreeData().then((data) => { this.$refs.tree.setData(data) });
-    },
     checkBoxClick(data) {
       console.log(data)
       console.log(this.$refs.tree.getSelected())
@@ -43,39 +34,28 @@ export default {
 </script>
 
 <style>
-.modal {
-  background-color: rgba(0, 0, 0, 0.3);
-  position: absolute;
-  margin: auto;
+body {
+  margin: 0;
+}
 
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #e1f5fe;
+  /* 使用更鲜艳的浅蓝色背景 */
 }
 
 .wrap {
-  height: 80%;
+  height: 70%;
+  max-height: 800px;
   width: 80%;
-  background-color: #fff;
-  position: absolute;
-
-  margin: auto;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  display: flex;
-}
-
-.tree {
-  width: 300px;
-  border: 2px solid #ccc;
-  overflow: auto;
-}
-
-.map {
-  border: 2px solid #ccc;
-  flex: 1;
+  max-width: 800px;
+  background-color: #f8f9fa;
+  /* 使用稍带颜色的背景替代纯白色 */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 </style>

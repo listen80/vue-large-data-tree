@@ -3,7 +3,7 @@
     <div class="node-content">
       <Caret :isLeaf="data.children && data.children.length" :expand="expand" @click="caretClick" />
       <CheckBox :flag="flag" @click="checkBoxClick" />
-      <span @click="labelClick">{{ data.name }}</span>
+      <span @click="labelClick"> {{ data.name }} </span>
       <span>( {{ checked }} / {{ total }} )</span>
     </div>
     <div class="p20">

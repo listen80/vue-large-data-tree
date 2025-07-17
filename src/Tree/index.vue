@@ -1,10 +1,6 @@
 <template>
-  <div v-if="data">
-    <LTreeNodeList
-      v-if="data.length"
-      ref="TreeNodeList"
-      :data="data"
-    ></LTreeNodeList>
+  <div class="tree" v-if="data">
+    <LTreeNodeList v-if="data.length" ref="TreeNodeList" :data="data"></LTreeNodeList>
     <div v-else>无数据</div>
   </div>
   <div v-else>载入中</div>
@@ -63,3 +59,12 @@ export default {
   },
 };
 </script>
+<style>
+.tree {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #1976d2;
+  height: 100%;
+  overflow: auto;
+  /* 添加鲜艳的蓝色文字颜色 */
+}
+</style>

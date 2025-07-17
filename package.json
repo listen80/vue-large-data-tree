@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "yarn serve",
-    "serve": "vue-cli-service serve --port 9006 --public-path ./ ",
-    "build": "vue-cli-service --public-path ./build ",
+    "serve": "vue-cli-service serve --port 9006 --public-path ./",
+    "build": "vue-cli-service build --public-path ./build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

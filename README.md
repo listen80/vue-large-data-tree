@@ -1,23 +1,9 @@
 # vue-large-data-tree
 
-## demo
-[demo](dist/)
-## Project setup
-```
-yarn install
-```
+## 演示 (Demo)
+点击查看 [在线演示](https://listen80.github.io/vue-large-data-tree/dist/)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## 项目设置
+执行以下命令安装项目依赖：
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
+## 原理

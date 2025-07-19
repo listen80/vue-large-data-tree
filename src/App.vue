@@ -1,7 +1,7 @@
 <template>
   <div class="modal">
     <div class="wrap">
-      <Tree ref="tree" @checkBoxClick="checkBoxClick" selected="selected" />
+      <Tree ref="tree" @checkBoxClick="checkBoxClick" />
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
   name: "Demo",
   data() {
     return {
-      selected: []
+      selectedCount: 0,
     };
   },
   components: {
@@ -22,12 +22,14 @@ export default {
   },
   mounted() {
     // 初始化树状结构数据
-    getTreeData().then((data) => { this.$refs.tree.setData(data) });
+    getTreeData(6, 10).then((data) => { this.$refs.tree.setData(data) });
   },
   methods: {
     checkBoxClick(data) {
-      console.log(data)
-      console.log(this.$refs.tree.getSelected())
+      console.log('currentClick', data)
+      const allSelected = this.$refs.tree.getSelected()
+      this.selectedCount = allSelected.length
+      console.log('selectedCount', this.selectedCount, allSelected)
     }
   },
 };

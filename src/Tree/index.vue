@@ -1,9 +1,11 @@
 <template>
-  <div class="tree" v-if="data">
-    <LTreeNodeList v-if="data.length" ref="TreeNodeList" :data="data"></LTreeNodeList>
-    <div v-else>无数据</div>
+  <div class="tree">
+    <template v-if="data">
+      <LTreeNodeList v-if="data.length" ref="TreeNodeList" :data="data"></LTreeNodeList>
+      <div class="text" v-else>无数据</div>
+    </template>
+    <div class="text" v-else>载入中</div>
   </div>
-  <div v-else>载入中</div>
 </template>
 
 <script>
@@ -66,5 +68,9 @@ export default {
   height: 100%;
   overflow: auto;
   /* 添加鲜艳的蓝色文字颜色 */
+}
+.text {
+  text-align: center;
+  margin-top: 20%;
 }
 </style>
